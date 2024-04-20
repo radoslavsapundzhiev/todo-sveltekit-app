@@ -21,6 +21,37 @@
         }
     }
 
+    const resolveTodo = async (todo) => {
+        const url = `http://localhost:5000/todos/${todo.id}`;
+        const result = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(todo)
+        })
+        return await result.json();
+    }
+
+    const handleResolve = async (todoId) => {
+        const isDone = !todo.isDone;
+        const updatedTodo = {...todo, isDone};
+        try {
+            const result = await resolveTodo(updatedTodo);
+            TodoStore.update((currentTodo) => {
+                return currentTodo.map(todo => {
+                    if (todo.id == todoId) {
+                        return result;
+                    }
+                    return todo;
+                });
+            });
+            todo.isDone = result.isDone;
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
 </script>
 
 <div class="columns">
@@ -28,11 +59,15 @@
         {todo.name}
     </div>
     <div class="column is-3">
+        {#if !todo.isDone}
+        <button class="button is-primary has-text-light" on:click={handleResolve}>
+            resolve
+        </button>
+        {:else}
+        <span class="is-success">Resolved</span>
+        {/if}
         <button class="button is-danger has-text-light" on:click={() => handleDelete(todo.id)}>
             delete
-        </button>
-        <button class="button is-primary has-text-light">
-            resolve
         </button>
     </div>
 </div>
