@@ -1,6 +1,5 @@
 <script>
   import Hero from "../components/Hero.svelte";
-  import Menu from "../components/Menu.svelte";
   import Footer from "../components/Footer.svelte";
 </script>
 
@@ -9,12 +8,7 @@
 <div class="columns is-flex-direction-column is-fullheight-100vh">
   <main class="column">
     <div class="columns">
-
-      <Menu/>
-
-      <div class="column is-10 has-text-dark">
-        <slot />
-      </div>
+      <slot />
     </div>
   </main>
 

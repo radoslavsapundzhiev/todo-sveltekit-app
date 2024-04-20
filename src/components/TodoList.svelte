@@ -1,39 +1,19 @@
 <script>
+    import {TodoStore} from "../routes/stores";
+    import { onMount } from "svelte";
     import TodoItem from "./TodoItem.svelte";
-    export let todos = [
-        {
-            id: 1,
-            name: "First todo",
-            color: '',
-            isDone: false
-        },
-        {
-            id: 2,
-            name: "Second todo",
-            color: '',
-            isDone: false
-        },
-        {
-            id: 3,
-            name: "Third todo",
-            color: '',
-            isDone: false
-        },
-        {
-            id: 4,
-            name: "Fourth todo",
-            color: '',
-            isDone: false
-        },
-        {
-            id: 5,
-            name: "Fifth todo",
-            color: '',
-            isDone: false
-        }
-    ]
+
+    onMount( async () => {
+        $TodoStore = await getTodos();
+    });
+
+    const getTodos = async () => {
+        const result = await fetch("http://localhost:5000/todos");
+        const data = await result.json();
+        return data;
+    }
 </script>
 
-{#each todos as todo (todo.id)}
+{#each $TodoStore as todo (todo.id)}
     <TodoItem todo={todo}/>
 {/each}

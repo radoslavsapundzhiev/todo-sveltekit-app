@@ -4,11 +4,16 @@
 
 <div class="box">
     <div class="columns">
-        <div class="column is-10">
+        <div class="column is-9">
             {todo.name}
         </div>
-        <div class="column is-2">
-            <button class="button is-danger">Delete</button>
+        <div class="column is-3">
+            <button class="button is-danger has-text-light">
+                delete
+            </button>
+            <button class="button is-primary has-text-light">
+                resolve
+            </button>
         </div>
     </div>
 </div>
