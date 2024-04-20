@@ -1,7 +1,7 @@
 <script>
-  import { TodoStore } from "../routes/stores.js";
+  import { TodoStore, showAddForm } from "../routes/stores.js";
   let name = '';
-  let color = '';
+  let color = '#000000';
   let isDone = false;
 
   const createTodo = async (newTodo) => {
@@ -24,15 +24,24 @@
       isDone
     }
 
-    const result = await createTodo(newTodo);
+    try {
+      const result = await createTodo(newTodo);
 
-    TodoStore.update((currentTodo) => {
-      return [result, ...currentTodo]
-    });
+      TodoStore.update((currentTodo) => {
+        return [result, ...currentTodo]
+      });
 
-    name = '';
-    color = '';
-    isDone = false;
+      name = '';
+      color = '#000000';
+      isDone = false;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function hideAddTodoForm() {
+    showAddForm.set(false);
   }
 
 </script>
@@ -63,7 +72,14 @@
       <button class="button is-link">Submit</button>
     </div>
     <div class="control">
-      <button class="button is-link is-light">Cancel</button>
+      <button class="button is-link is-light" on:click={hideAddTodoForm}>Cancel</button>
     </div>
   </div>
 </form>
+
+<style>
+  form {
+    width: 50%;
+    margin: 0 auto;
+  }
+</style>

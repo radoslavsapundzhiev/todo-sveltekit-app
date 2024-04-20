@@ -2,9 +2,11 @@
     import {TodoStore} from "../routes/stores";
     import { onMount } from "svelte";
     import TodoItem from "./TodoItem.svelte";
+    import { fade, scale } from "svelte/transition";
 
     onMount( async () => {
-        $TodoStore = await getTodos();
+        const todos = await getTodos();
+        TodoStore.set(todos);
     });
 
     const getTodos = async () => {
@@ -15,5 +17,7 @@
 </script>
 
 {#each $TodoStore as todo (todo.id)}
-    <TodoItem todo={todo}/>
+    <div class="box" in:scale out:fade="{{ duration: 500 }}">
+        <TodoItem todo={todo}/>
+    </div>
 {/each}

@@ -1,46 +1,22 @@
 {
   "todos": [
     {
-      "id": 1,
-      "name": "First todo",
-      "color": "",
+      "id": "c467",
+      "name": "first todo",
+      "color": "#21305f",
       "isDone": false
     },
     {
-      "id": 2,
-      "name": "Second todo",
-      "color": "",
+      "id": "4a2e",
+      "name": "second todo",
+      "color": "#1e6c39",
       "isDone": false
     },
     {
-      "id": 3,
-      "name": "Third todo",
-      "color": "",
+      "id": "f68a",
+      "name": "third todo",
+      "color": "#ba9326",
       "isDone": false
-    },
-    {
-      "id": 4,
-      "name": "Fourth todo",
-      "color": "",
-      "isDone": false
-    },
-    {
-      "id": 5,
-      "name": "Fifth todo",
-      "color": "",
-      "isDone": false
-    },
-    {
-      "id": "71e6",
-      "name": "test",
-      "color": "#797f29",
-      "isDone": false
-    },
-    {
-      "id": "1db7",
-      "name": "test1",
-      "color": "#187c5e",
-      "isDone": true
     }
   ]
 }

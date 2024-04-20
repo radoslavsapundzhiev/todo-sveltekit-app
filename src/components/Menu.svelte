@@ -1,9 +1,8 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
+    import { showAddForm } from "../routes/stores.js";
 
-    function handleClickAddTodo() {
-        dispatch('toggleAddForm');
+    function toggleAddForm() {
+        showAddForm.update(n => !n);
     }
 </script>
 
@@ -24,7 +23,7 @@
         <li>
             <a class="has-background-grey has-text-light">Remove all todos</a>
         </li>
-        <li><a class="has-background-grey has-text-light" on:click={handleClickAddTodo}>Add Todo</a></li>
+        <li><a class="has-background-grey has-text-light" on:click={toggleAddForm}>Add Todo</a></li>
         </ul>
     </aside>
 </div>

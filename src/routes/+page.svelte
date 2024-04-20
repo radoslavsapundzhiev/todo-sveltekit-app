@@ -1,18 +1,13 @@
 <script>
+  import { showAddForm } from "../routes/stores.js";
   import Menu from "../components/Menu.svelte";
   import Search from "../components/Search.svelte";
   import AddTodoForm from "../components/AddTodoForm.svelte";
   import TodoList from "../components/TodoList.svelte";
 
-  let showAddForm = false;
-
-  function handleToggleAddForm() {
-    showAddForm = !showAddForm;
-  }
-  
 </script>
 
-<Menu on:toggleAddForm={handleToggleAddForm}/>
+<Menu/>
 
 <div class="column is-10 has-text-dark">
 
@@ -22,7 +17,7 @@
 
   <Search />
   
-  {#if showAddForm}
+  {#if $showAddForm}
   <AddTodoForm />
   {/if}
 
