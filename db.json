@@ -10,13 +10,13 @@
       "id": "ac62",
       "name": "second todo",
       "color": "#101ab2",
-      "isDone": true
+      "isDone": false
     },
     {
       "id": "29fc",
       "name": "third todo",
       "color": "#e5931f",
-      "isDone": true
+      "isDone": false
     }
   ]
 }

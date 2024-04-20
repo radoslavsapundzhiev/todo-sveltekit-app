@@ -56,7 +56,8 @@
 
 <div class="columns">
     <div class="column is-9">
-        {todo.name}
+        <strong>Title: </strong><span>{todo.name}</span> |
+        <strong>Color: </strong><input type="color" bind:value={todo.color}>
     </div>
     <div class="column is-3">
         {#if !todo.isDone}
