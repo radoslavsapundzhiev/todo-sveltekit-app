@@ -1,5 +1,5 @@
 <script>
-    import { showAddForm, TodoStore } from "../routes/stores.js";
+    import { showAddForm, TodoStore, showNotification, messageStyle, messageText } from "../routes/stores.js";
     import TodoService from "../services/TodoService.js";
 
     function toggleAddForm() {
@@ -7,16 +7,24 @@
     }
 
     const handleDeleteAll = async () => {
-        const allIds = $TodoStore.map(todo => todo.id);
-        try {
-            const allPromises = [];
-            allIds.forEach(id => {
-                allPromises.push(TodoService.deleteTodo(id));
-            });
-            const result = await Promise.all(allPromises);
-            TodoStore.set([]);
-        } catch (error) {
-            console.log(error);
+        if (confirm("Are you sure?")) {
+            const allIds = $TodoStore.map(todo => todo.id);
+            try {
+                const allPromises = [];
+                allIds.forEach(id => {
+                    allPromises.push(TodoService.deleteTodo(id));
+                });
+                const result = await Promise.all(allPromises);
+                TodoStore.set([]);
+                showNotification.set(true);
+                messageStyle.set("is-success");
+                messageText.set(`All todos were deleted successfully!`);
+            } catch (error) {
+                console.log(error);
+                showNotification.set(true);
+                messageStyle.set("is-danger");
+                messageText.set(error.message);
+            }
         }
     }
 
@@ -29,8 +37,14 @@
             });
             const result = await Promise.all(allPromises);
             TodoStore.set(result);
+            showNotification.set(true);
+            messageStyle.set("is-success");
+            messageText.set(`All todos were resolved successfully!`);
         } catch (error) {
             console.log(error);
+            showNotification.set(true);
+            messageStyle.set("is-danger");
+            messageText.set(error.message);
         }
     }
 
@@ -43,8 +57,14 @@
             });
             const result = await Promise.all(allPromises);
             TodoStore.set(result);
+            showNotification.set(true);
+            messageStyle.set("is-success");
+            messageText.set(`All todos were unresolved successfully!`);
         } catch (error) {
             console.log(error);
+            showNotification.set(true);
+            messageStyle.set("is-danger");
+            messageText.set(error.message);
         }
     }
 </script>

@@ -1,10 +1,22 @@
 {
   "todos": [
     {
-      "id": "65b3",
+      "id": "03a4",
       "name": "first todo",
-      "color": "#4836a6",
-      "isDone": false
+      "color": "#e4113b",
+      "isDone": true
+    },
+    {
+      "id": "7068",
+      "name": "second todo",
+      "color": "#dd27d7",
+      "isDone": true
+    },
+    {
+      "id": "cea7",
+      "name": "third todo",
+      "color": "#1aba17",
+      "isDone": true
     }
   ]
 }

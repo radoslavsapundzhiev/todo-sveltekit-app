@@ -1,18 +1,26 @@
 <script>
-    import { TodoStore } from "../routes/stores.js";
+    import { TodoStore, messageStyle, messageText, showNotification } from "../routes/stores.js";
     import TodoService from "../services/TodoService.js";
     export let todo;
 
     let showDone = true;
 
     const handleDelete = async (todoId) => {
-        try {
-            const result = await TodoService.deleteTodo(todoId);
-            TodoStore.update((currentTodo) => {
-                return currentTodo.filter(todo => todo.id != result.id);
-            });
-        } catch (error) {
-            console.log(error);
+        if (confirm("Are you sure?")) {
+            try {
+                const result = await TodoService.deleteTodo(todoId);
+                TodoStore.update((currentTodo) => {
+                    return currentTodo.filter(todo => todo.id != result.id);
+                });
+                showNotification.set(true);
+                messageStyle.set("is-success");
+                messageText.set(`Todo with name: ${result.name} and color: ${result.color} was deleted successfully!`);
+            } catch (error) {
+                console.log(error);
+                showNotification.set(true);
+                messageStyle.set("is-danger");
+                messageText.set(error.message);
+            }
         }
     }
 
@@ -30,8 +38,14 @@
                 });
             });
             todo.isDone = result.isDone;
+            showNotification.set(true);
+            messageStyle.set("is-success");
+            messageText.set(`Todo with name: ${result.name} and color: ${result.color} was resolved successfully!`);
         } catch(error) {
             console.log(error);
+            showNotification.set(true);
+            messageStyle.set("is-danger");
+            messageText.set(error.message);
         }
     }
 
