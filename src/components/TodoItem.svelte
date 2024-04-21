@@ -2,6 +2,8 @@
     import { TodoStore } from "../routes/stores.js";
     export let todo;
 
+    let showDone = true;
+
     const deleteTodo = async (todoId) => {
         const url = `http://localhost:5000/todos/${todoId}`;
         const result = await fetch(url, {
@@ -52,20 +54,29 @@
         }
     }
 
+    function handleShowDone() {
+        showDone = !showDone;
+    }
+
 </script>
 
 <div class="columns">
     <div class="column is-9">
         <strong>Title: </strong><span>{todo.name}</span> |
-        <strong>Color: </strong><input type="color" bind:value={todo.color}>
+        <strong>Color: </strong><input type="color" bind:value={todo.color}> |
+        <strong>Color text: </strong><span>{todo.color}</span>
     </div>
     <div class="column is-3">
         {#if !todo.isDone}
-        <button class="button is-primary has-text-light" on:click={handleResolve}>
+        <button class="button is-warning has-text-light" on:click={handleResolve}>
             resolve
         </button>
         {:else}
-        <span class="is-success">Resolved</span>
+        {#if showDone}
+        <button class="button is-success has-text-light" on:click={handleShowDone}>
+            DONE
+        </button>
+        {/if}
         {/if}
         <button class="button is-danger has-text-light" on:click={() => handleDelete(todo.id)}>
             delete

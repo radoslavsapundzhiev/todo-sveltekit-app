@@ -1,28 +1,26 @@
 <script>
   import { showAddForm } from "../routes/stores.js";
   import Menu from "../components/Menu.svelte";
-  import Search from "../components/Search.svelte";
+  import Filter from "../components/Filter.svelte";
   import AddTodoForm from "../components/AddTodoForm.svelte";
   import TodoList from "../components/TodoList.svelte";
-
+  import Notification from "../components/Notification.svelte";
 </script>
 
 <Menu/>
 
 <div class="column is-10 has-text-dark">
 
+  <div class="container">
+    <Notification/>
+    {#if $showAddForm}
+    <AddTodoForm />
+    {/if}
 
-<div class="container">
-  <h1 class="title">Home</h1>
+    <Filter />
 
-  <Search />
-  
-  {#if $showAddForm}
-  <AddTodoForm />
-  {/if}
-
-  <TodoList/>
-</div>
+    <TodoList/>
+  </div>
 
 </div>
 

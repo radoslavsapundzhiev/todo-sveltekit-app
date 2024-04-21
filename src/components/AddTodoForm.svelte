@@ -1,8 +1,9 @@
 <script>
-  import { TodoStore, showAddForm } from "../routes/stores.js";
+  import { TodoStore, showAddForm, showNotification, messageStyle, messageText } from "../routes/stores.js";
   let name = '';
   let color = '#000000';
   let isDone = false;
+  let message = "";
 
   const createTodo = async (newTodo) => {
     const url = "http://localhost:5000/todos";
@@ -25,11 +26,19 @@
     }
 
     try {
+      if (name === "") {
+        throw new Error("Name should not be empty!");
+      }
       const result = await createTodo(newTodo);
 
       TodoStore.update((currentTodo) => {
         return [result, ...currentTodo]
       });
+
+      showNotification.set(true);
+      messageStyle.set("is-success");
+      messageText.set(`Todo with name: ${name} and color: ${color} was added successfully!`);
+      showAddForm.set(false);
 
       name = '';
       color = '#000000';
@@ -37,6 +46,9 @@
 
     } catch (error) {
       console.log(error);
+      showNotification.set(true);
+      messageStyle.set("is-danger");
+      messageText.set(error.message);
     }
   }
 
@@ -72,7 +84,7 @@
       <button class="button is-link">Submit</button>
     </div>
     <div class="control">
-      <button class="button is-link is-light" on:click={hideAddTodoForm}>Cancel</button>
+      <a class="button is-link is-light" on:click={hideAddTodoForm}>Cancel</a>
     </div>
   </div>
 </form>
