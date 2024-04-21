@@ -1,28 +1,9 @@
 <script>
     import { showAddForm, TodoStore } from "../routes/stores.js";
+    import TodoService from "../services/TodoService.js";
 
     function toggleAddForm() {
         showAddForm.update(n => !n);
-    }
-
-    const deleteTodo = async (todoId) => {
-        const url = `http://localhost:5000/todos/${todoId}`;
-        const result = await fetch(url, {
-            method: "DELETE",
-        });
-        return await result.json();
-    }
-
-    const resolveTodo = async (todo) => {
-        const url = `http://localhost:5000/todos/${todo.id}`;
-        const result = await fetch(url, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(todo)
-        })
-        return await result.json();
     }
 
     const handleDeleteAll = async () => {
@@ -30,7 +11,7 @@
         try {
             const allPromises = [];
             allIds.forEach(id => {
-                allPromises.push(deleteTodo(id));
+                allPromises.push(TodoService.deleteTodo(id));
             });
             const result = await Promise.all(allPromises);
             TodoStore.set([]);
@@ -44,7 +25,7 @@
             const allPromises = [];
             $TodoStore.forEach(todo => {
                 todo.isDone = true;
-                allPromises.push(resolveTodo(todo));
+                allPromises.push(TodoService.resolveTodo(todo));
             });
             const result = await Promise.all(allPromises);
             TodoStore.set(result);
@@ -58,7 +39,7 @@
             const allPromises = [];
             $TodoStore.forEach(todo => {
                 todo.isDone = false;
-                allPromises.push(resolveTodo(todo));
+                allPromises.push(TodoService.resolveTodo(todo));
             });
             const result = await Promise.all(allPromises);
             TodoStore.set(result);

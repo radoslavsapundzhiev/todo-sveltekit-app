@@ -1,69 +1,9 @@
 {
   "todos": [
     {
-      "id": "e9ec",
+      "id": "65b3",
       "name": "first todo",
-      "color": "#cb1a1a",
-      "isDone": true
-    },
-    {
-      "id": "3fa8",
-      "name": "second todo",
-      "color": "#1fe08c",
-      "isDone": true
-    },
-    {
-      "id": "cfe7",
-      "name": "third todo",
-      "color": "#3f16d4",
-      "isDone": true
-    },
-    {
-      "id": "04c9",
-      "name": "forth todo",
-      "color": "#ccd912",
-      "isDone": true
-    },
-    {
-      "id": "1ed6",
-      "name": "fifth todo",
-      "color": "#cf2ab9",
-      "isDone": true
-    },
-    {
-      "id": "835f",
-      "name": "sixth todo",
-      "color": "#3f16d4",
-      "isDone": true
-    },
-    {
-      "id": "a3ae",
-      "name": "seventh todo",
-      "color": "#3f16d4",
-      "isDone": true
-    },
-    {
-      "id": "994a",
-      "name": "eigth todo",
-      "color": "#cf18e7",
-      "isDone": true
-    },
-    {
-      "id": "2c32",
-      "name": "tenth todo",
-      "color": "#3a1cd4",
-      "isDone": true
-    },
-    {
-      "id": "599d",
-      "name": "ninth todo",
-      "color": "#0560c2",
-      "isDone": true
-    },
-    {
-      "id": "1b71",
-      "name": "new",
-      "color": "#000000",
+      "color": "#4836a6",
       "isDone": false
     }
   ]

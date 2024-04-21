@@ -3,17 +3,13 @@
     import { onMount } from "svelte";
     import TodoItem from "./TodoItem.svelte";
     import { fade, scale } from "svelte/transition";
+    import TodoService from "../services/TodoService";
 
     onMount( async () => {
-        const todos = await getTodos();
+        const todos = await TodoService.getTodos();
         TodoStore.set(todos);
     });
-
-    const getTodos = async () => {
-        const result = await fetch("http://localhost:5000/todos");
-        const data = await result.json();
-        return data;
-    }
+    
 </script>
 
 {#each $TodoStore as todo (todo.id)}

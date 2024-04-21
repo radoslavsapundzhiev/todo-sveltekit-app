@@ -1,20 +1,13 @@
 <script>
     import { TodoStore } from "../routes/stores.js";
+    import TodoService from "../services/TodoService.js";
     export let todo;
 
     let showDone = true;
 
-    const deleteTodo = async (todoId) => {
-        const url = `http://localhost:5000/todos/${todoId}`;
-        const result = await fetch(url, {
-            method: "DELETE",
-        });
-        return await result.json();
-    }
-
     const handleDelete = async (todoId) => {
         try {
-            const result = await deleteTodo(todoId);
+            const result = await TodoService.deleteTodo(todoId);
             TodoStore.update((currentTodo) => {
                 return currentTodo.filter(todo => todo.id != result.id);
             });
@@ -23,23 +16,11 @@
         }
     }
 
-    const resolveTodo = async (todo) => {
-        const url = `http://localhost:5000/todos/${todo.id}`;
-        const result = await fetch(url, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(todo)
-        })
-        return await result.json();
-    }
-
     const handleResolve = async (todoId) => {
         const isDone = !todo.isDone;
         const updatedTodo = {...todo, isDone};
         try {
-            const result = await resolveTodo(updatedTodo);
+            const result = await TodoService.resolveTodo(updatedTodo);
             TodoStore.update((currentTodo) => {
                 return currentTodo.map(todo => {
                     if (todo.id == todoId) {

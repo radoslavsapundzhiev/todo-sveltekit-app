@@ -1,22 +1,10 @@
 <script>
   import { TodoStore, showAddForm, showNotification, messageStyle, messageText } from "../routes/stores.js";
+  import TodoService from "../services/TodoService.js";
+
   let name = '';
   let color = '#000000';
   let isDone = false;
-  let message = "";
-
-  const createTodo = async (newTodo) => {
-    const url = "http://localhost:5000/todos";
-    const result = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTodo)
-    });
-
-    return await result.json();
-  }
 
   const handleSubmit = async () => {
     const newTodo = {
@@ -29,7 +17,7 @@
       if (name === "") {
         throw new Error("Name should not be empty!");
       }
-      const result = await createTodo(newTodo);
+      const result = await TodoService.createTodo(newTodo);
 
       TodoStore.update((currentTodo) => {
         return [result, ...currentTodo]
