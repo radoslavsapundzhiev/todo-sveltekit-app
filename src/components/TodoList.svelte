@@ -6,8 +6,12 @@
     import TodoService from "../services/TodoService";
 
     onMount( async () => {
-        const todos = await TodoService.getTodos();
-        TodoStore.set(todos);
+        try {
+            const todos = await TodoService.getTodos();
+            TodoStore.set(todos);
+        } catch (error) {
+            console.log(error);
+        }
     });
     
 </script>

@@ -40,7 +40,7 @@
 </script>
 
 <div class="columns">
-    <div class="column is-2 is-offset-5">
+    <div class="column is-2 is-offset-2">
         <label class="checkbox" on:change={handleToggleResolve}>
             <input class="checkbox" type="checkbox" bind:checked={resolved}>
             Resolved
@@ -56,18 +56,29 @@
             </select>
         </div>
     </div>
-    <div class="column is-1">
+    <div class="column is-2">
         <input type="color" value={color} disabled>
     </div>
-    <div class="column is-1">
+    <div class="column is-2">
         <button class="button is-info" on:click={handleReset}>
             Reset
         </button>
     </div>
-    <div class="column is-1">
+    <div class="column is-2">
         <button class="button is-info" on:click={handleFilter}>
             Search
         </button>
     </div>
 </div>
+
+<style>
+    button {
+        margin-right: 1rem;
+    }
+    div.columns {
+        border: 1px solid lightgray;
+        border-radius: 1rem;
+        margin: 0.5rem 2rem;
+    }
+</style>
 
