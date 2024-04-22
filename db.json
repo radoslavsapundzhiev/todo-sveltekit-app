@@ -4,7 +4,7 @@
       "id": "83df",
       "name": "first todo",
       "color": "#20d936",
-      "isDone": false
+      "isDone": true
     },
     {
       "id": "a11a",
@@ -16,6 +16,12 @@
       "id": "dd4b",
       "name": "third todo",
       "color": "#e99c2f",
+      "isDone": false
+    },
+    {
+      "id": "3d3f",
+      "name": "third todo",
+      "color": "#33319b",
       "isDone": false
     }
   ]

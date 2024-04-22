@@ -1,7 +1,17 @@
 <script>
     import { TodoStore, messageStyle, messageText, showNotification } from "../routes/stores.js";
     import TodoService from "../services/TodoService.js";
+    import { createEventDispatcher } from "svelte";
+
     export let todo;
+
+    const dispatch = createEventDispatcher();
+
+    function handleResolve() {
+        dispatch('resolve', {
+            todo: todo
+        });
+    }
 
     let showDone = true;
 
@@ -21,31 +31,6 @@
                 messageStyle.set("is-danger");
                 messageText.set(error.message);
             }
-        }
-    }
-
-    const handleResolve = async (todoId) => {
-        const isDone = !todo.isDone;
-        const updatedTodo = {...todo, isDone};
-        try {
-            const result = await TodoService.resolveTodo(updatedTodo);
-            TodoStore.update((currentTodo) => {
-                return currentTodo.map(todo => {
-                    if (todo.id == todoId) {
-                        return result;
-                    }
-                    return todo;
-                });
-            });
-            todo.isDone = result.isDone;
-            showNotification.set(true);
-            messageStyle.set("is-success");
-            messageText.set(`Todo with name: ${result.name} and color: ${result.color} was resolved successfully!`);
-        } catch(error) {
-            console.log(error);
-            showNotification.set(true);
-            messageStyle.set("is-danger");
-            messageText.set(error.message);
         }
     }
 
